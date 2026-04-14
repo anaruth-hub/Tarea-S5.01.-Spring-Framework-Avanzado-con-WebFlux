@@ -1,4 +1,8 @@
 package com.anaruth.blackjack.domain.model.game;
 
-public class GameStatus {
+public enum GameStatus  {
+    IN_PROGRESS,
+    PLAYER_WON ,
+    DEALER_WON,
+    DRAW
 }
