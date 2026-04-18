@@ -1,11 +1,9 @@
-package com.anaruth.blackjack.infraestructure.adapter.in.web;
+package com.anaruth.blackjack.infrastructure.adapter.in.web;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
-
-import java.awt.*;
 
 @RestController
 public class HealthController {
