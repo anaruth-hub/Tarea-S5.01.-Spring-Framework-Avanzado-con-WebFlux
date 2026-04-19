@@ -1,4 +1,4 @@
-package com.anaruth.blackjack.infraestructure.adapter.in.web;
+package com.anaruth.blackjack.infrastructure.adapter.in.web;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
