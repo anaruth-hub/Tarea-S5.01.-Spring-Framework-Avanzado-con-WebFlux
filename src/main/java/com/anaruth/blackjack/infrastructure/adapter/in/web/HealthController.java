@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-import java.awt.*;
-
 @RestController
 public class HealthController {
     @GetMapping(value = "/health", produces = MediaType.TEXT_PLAIN_VALUE)
