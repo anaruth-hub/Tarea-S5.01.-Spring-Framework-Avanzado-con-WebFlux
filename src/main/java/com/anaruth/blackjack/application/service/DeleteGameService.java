@@ -3,8 +3,10 @@ package com.anaruth.blackjack.application.service;
 import com.anaruth.blackjack.application.port.in.DeleteGameUseCase;
 import com.anaruth.blackjack.domain.exception.GameNotFoundException;
 import com.anaruth.blackjack.domain.port.out.GameRepository;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+@Service
 public class DeleteGameService implements DeleteGameUseCase {
 
     private final GameRepository gameRepository;
