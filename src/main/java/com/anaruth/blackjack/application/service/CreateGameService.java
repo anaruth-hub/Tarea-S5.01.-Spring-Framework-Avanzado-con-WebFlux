@@ -8,8 +8,10 @@ import com.anaruth.blackjack.domain.model.player.PlayerId;
 import com.anaruth.blackjack.domain.model.player.PlayerName;
 import com.anaruth.blackjack.domain.port.out.GameRepository;
 import com.anaruth.blackjack.domain.port.out.PlayerRepository;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+@Service
 public class CreateGameService implements CreateGameUseCase {
 
     private final GameRepository gameRepository;

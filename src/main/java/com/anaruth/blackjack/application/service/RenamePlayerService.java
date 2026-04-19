@@ -6,8 +6,10 @@ import com.anaruth.blackjack.domain.exception.PlayerNotFoundException;
 import com.anaruth.blackjack.domain.model.player.Player;
 import com.anaruth.blackjack.domain.model.player.PlayerName;
 import com.anaruth.blackjack.domain.port.out.PlayerRepository;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+@Service
 public class RenamePlayerService implements RenamePlayerUseCase {
 
     private final PlayerRepository playerRepository;

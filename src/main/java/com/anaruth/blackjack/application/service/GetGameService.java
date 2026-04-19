@@ -4,8 +4,10 @@ import com.anaruth.blackjack.application.port.in.GetGameUseCase;
 import com.anaruth.blackjack.domain.exception.GameNotFoundException;
 import com.anaruth.blackjack.domain.model.game.Game;
 import com.anaruth.blackjack.domain.port.out.GameRepository;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+@Service
 public class GetGameService implements GetGameUseCase {
 
     private final GameRepository gameRepository;
