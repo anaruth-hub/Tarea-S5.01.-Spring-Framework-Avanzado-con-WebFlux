@@ -7,7 +7,10 @@ import com.anaruth.blackjack.infrastructure.adapter.in.web.request.RenamePlayerR
 import com.anaruth.blackjack.infrastructure.adapter.in.web.response.PlayerResponse;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name = "Player", description = "Player operations")
 @RestController
 @RequestMapping("/player")
 public class PlayerController {
@@ -18,6 +21,7 @@ public class PlayerController {
         this.renamePlayerUseCase = renamePlayerUseCase;
     }
 
+    @Operation(summary = "Rename a player")
     @PutMapping("/{playerId}")
     public Mono<PlayerResponse> renamePlayer(@PathVariable String playerId,
                                              @RequestBody RenamePlayerRequest request) {
