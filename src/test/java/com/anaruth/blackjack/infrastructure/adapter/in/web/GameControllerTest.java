@@ -2,6 +2,7 @@ package com.anaruth.blackjack.infrastructure.adapter.in.web;
 
 import com.anaruth.blackjack.application.dto.CreateGameCommand;
 import com.anaruth.blackjack.application.port.in.CreateGameUseCase;
+import com.anaruth.blackjack.application.port.in.DeleteGameUseCase;
 import com.anaruth.blackjack.application.port.in.GetGameUseCase;
 import com.anaruth.blackjack.application.port.in.PlayGameUseCase;
 import com.anaruth.blackjack.domain.model.game.Game;
@@ -34,6 +35,9 @@ class GameControllerTest {
     @MockBean
     private PlayGameUseCase playGameUseCase;
 
+    @MockBean
+    private DeleteGameUseCase deleteGameUseCase;
+
     @Test
     void shouldCreateGameSuccessfully() {
         Player player = new Player(PlayerId.randomId(), new PlayerName("Ana"));
@@ -51,10 +55,12 @@ class GameControllerTest {
                         }
                         """)
                 .exchange()
-                .expectStatus().isOk()
+                .expectStatus().isCreated()
                 .expectBody()
                 .jsonPath("$.id").isEqualTo(game.getId())
                 .jsonPath("$.status").isEqualTo(game.getStatus().name())
+                .jsonPath("$.playerId").isEqualTo(game.getPlayer().getId().getValue())
+                .jsonPath("$.playerName").isEqualTo(game.getPlayer().getName().getValue())
                 .jsonPath("$.playerScore").isEqualTo(game.getPlayerHand().calculateScore())
                 .jsonPath("$.dealerScore").isEqualTo(game.getDealerHand().calculateScore());
     }
@@ -74,7 +80,22 @@ class GameControllerTest {
                 .expectBody()
                 .jsonPath("$.id").isEqualTo(game.getId())
                 .jsonPath("$.status").isEqualTo(game.getStatus().name())
+                .jsonPath("$.playerId").isEqualTo(game.getPlayer().getId().getValue())
+                .jsonPath("$.playerName").isEqualTo(game.getPlayer().getName().getValue())
                 .jsonPath("$.playerScore").isEqualTo(game.getPlayerHand().calculateScore())
                 .jsonPath("$.dealerScore").isEqualTo(game.getDealerHand().calculateScore());
+    }
+
+    @Test
+    void shouldDeleteGameSuccessfully() {
+        String gameId = "game-123";
+
+        when(deleteGameUseCase.deleteGameById(gameId))
+                .thenReturn(Mono.empty());
+
+        webTestClient.delete()
+                .uri("/game/{id}/delete", gameId)
+                .exchange()
+                .expectStatus().isNoContent();
     }
 }
