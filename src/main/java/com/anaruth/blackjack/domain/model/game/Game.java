@@ -41,10 +41,13 @@ public class Game {
 
         if (playerScore == 21 && dealerScore == 21) {
             status = GameStatus.DRAW;
+            player.registerDraw();
         } else if (playerScore == 21) {
             status = GameStatus.PLAYER_WON;
+            player.registerWin();
         } else if (dealerScore == 21) {
             status = GameStatus.DEALER_WON;
+            player.registerLoss();
         }
     }
 
@@ -66,6 +69,7 @@ public class Game {
 
         if (playerHand.isBust()) {
             status = GameStatus.DEALER_WON;
+            player.registerLoss();
         } else if (playerHand.calculateScore() == 21) {
             stand();
 
@@ -89,14 +93,16 @@ public class Game {
 
         if (dealerHand.isBust()) {
             status = GameStatus.PLAYER_WON;
+            player.registerWin();
             return;
         }
 
         if (playerScore > dealerScore) {
             status = GameStatus.PLAYER_WON;
+            player.registerWin();
         } else if (dealerScore > playerScore) {
             status = GameStatus.DEALER_WON;
-
+            player.registerLoss();
         } else {
             status = GameStatus.DRAW;
         }

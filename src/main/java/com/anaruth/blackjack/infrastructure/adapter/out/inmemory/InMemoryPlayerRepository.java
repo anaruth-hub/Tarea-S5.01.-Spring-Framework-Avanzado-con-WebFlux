@@ -3,6 +3,7 @@ package com.anaruth.blackjack.infrastructure.adapter.out.inmemory;
 import com.anaruth.blackjack.domain.model.player.Player;
 import com.anaruth.blackjack.domain.port.out.PlayerRepository;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
@@ -29,5 +30,9 @@ public class InMemoryPlayerRepository implements PlayerRepository {
     public Mono<Player> update(Player player) {
         storage.put(player.getId().getValue(), player);
         return Mono.just(player);
+    }
+        @Override
+        public Flux<Player> findAll() {
+            return Flux.fromIterable(storage.values());
     }
 }
